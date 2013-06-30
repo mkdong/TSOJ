@@ -1,21 +1,42 @@
-package com.tsoj.web;
+package com.tsoj.web.entity;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Problem {
+import org.hibernate.annotations.GenericGenerator;
+
+
+@Entity
+@Table(name="Problems")
+public class Problem implements Serializable{
+	@Id
+	@Column(name="pid", nullable=false, unique=true)
+	@GenericGenerator(name="generator", strategy="identity")
+	@GeneratedValue(generator="generator")
 	private int pid;
+	@Column
 	private String ptitle;
+	@Column
 	private String pcontent;
+	@Column
 	private String pinput;
+	@Column
 	private String poutput;
+	@Column
 	private String psamplei;
+	@Column
 	private String psampleo;
+	@Column
 	private int ptime;
+	@Column
 	private int pmemory;
+	@Column
 	private int plevel;
+	@Column
 	private String pcategory;
 	
 	public Problem() {
@@ -45,7 +66,7 @@ public class Problem {
 	public int getPlevel() { return plevel; }
 	public void setPcategory(String pcategory) { this.pcategory = pcategory; }
 	public String getPcategory() { return pcategory; }
-	
+	/*
 	public static final Problem fetchProblem(int pid) throws Exception {
 		Connection conn = null;
 		PreparedStatement stmt;
@@ -196,5 +217,6 @@ public class Problem {
 			}
 		}
 	}
+	*/
 
 }

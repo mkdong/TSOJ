@@ -10,7 +10,7 @@
 	$(document).ready(function () {
 		
 		$("#submit").click(function () {
-			$.post("services/newproblem", {
+			$.post("srv/newproblem", {
 				"ptitle"	:	$("#ptitle").val(),
 				"pcontent"	:	$("#pcontent").val(),
 				"pinput"	:	$("#pinput").val(),

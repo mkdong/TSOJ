@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#login").click(function () {
-			$.post("services/login",{
+			$.post("srv/login",{
 				"uid"		:	$("#username").val(),
 				"upasswd"	:	$("#password").val()
 			}, function(response) {

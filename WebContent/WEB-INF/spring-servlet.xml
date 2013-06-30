@@ -41,5 +41,44 @@
     <!-- ignore the statistic files in /scripts --> 
     <mvc:resources mapping="/scripts/**" location="/scripts/" /> 
     
+      <!-- 该 BeanPostProcessor 将自动对标注 @Autowired 的 Bean 进行注入 -->   
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+    <bean id="UserService" class="com.tsoj.web.service.UserService" />
+    <bean id="UserDao" class="com.tsoj.web.dao.UserDao" />
+    <bean id="ProblemService" class="com.tsoj.web.service.ProblemService" />
+    <bean id="ProblemDao" class="com.tsoj.web.dao.ProblemDao" />
+    
+    <!-- Hibernate4 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">	
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/tsoj?characterEncoding=UTF-8" />
+		<property name="username" value="tsoi" />
+		<property name="password" value="tsoi" />
+	</bean>
+
+  	<!-- 可追加配置二级缓存 -->
+  	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
+    	<property name="dataSource" ref="dataSource"/>
+    	<property name="packagesToScan">
+			<list>
+				<value>com.tsoj.web</value>
+			</list>
+		</property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.query.substitutions">true 1, false 0</prop>
+                <prop key="hibernate.default_batch_fetch_size">16</prop>
+                <prop key="hibernate.max_fetch_depth">2</prop>
+                <prop key="hibernate.generate_statistics">true</prop>
+                <prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+            </props>
+        </property>
+  	</bean>
 	    
 </beans> 

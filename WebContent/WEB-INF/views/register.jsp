@@ -14,7 +14,7 @@
 				alert("两次输入的密码不一致");
 				return false;
 			}
-			$.post("services/register",{
+			$.post("srv/register",{
 				"uid"		:	$("#username").val(),
 				"upasswd"	:	$("#password").val()
 			}, function(response) {

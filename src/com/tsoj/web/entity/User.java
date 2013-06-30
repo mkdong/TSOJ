@@ -1,27 +1,29 @@
-package com.tsoj.web;
+package com.tsoj.web.entity;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.hibernate.annotations.GenericGenerator;
 
-public class User {
+
+@Entity
+@Table(name="Users")
+public class User implements Serializable {
+	@Id
+	@Column(name="uid", length=32, nullable=false, unique=true)
 	private String uid;
+	@Column
 	private String upasswd;
+	@Column
 	private char utype;
+	@Column
 	private String uname;
+	@Column
 	private String uinfo;
-	
-	public User(String uid, String upasswd, char utype, String uname, String uinfo) {
-		this.uid = uid;
-		this.upasswd = upasswd;
-		this.utype = utype;
-		this.uname = uname;
-		this.uinfo = uinfo;
-	}
 	
 	public User() {
 		uid = upasswd = uname = uinfo = null;
@@ -62,6 +64,7 @@ public class User {
 	public String getUinfo() {
 		return uinfo;
 	}
+	/*
 	public static final User fetchUser(String uid) throws Exception {
 		Connection conn = null;
 		PreparedStatement stmt;
@@ -198,4 +201,5 @@ public class User {
 			}
 		}
 	}
+	*/
 }
