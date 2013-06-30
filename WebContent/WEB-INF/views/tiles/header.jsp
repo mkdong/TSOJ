@@ -7,17 +7,67 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TSOJ - Header</title>
+<style type="text/css">
+	body{
+		text-align:center;
+	}
+	.header{
+		top:0px;
+		background-color:#7798CB;
+		height:50px;
+		text-align:right;
+		font-size:20px;
+		color:white;
+	}
+	.header>img{
+		float:left;
+		width:50px;
+		height:50px;
+		padding-left:50px;
+	}
+	.header>nav{
+		padding-top:15px;
+	}
+	.header>nav .nav{
+		float:left;
+	}
+	.header>nav .account{
+		float:right;
+		padding-right:50px;
+	}
+	.header a{
+		text-decoration:none;
+		color:white;
+		padding-left:30px;
+	}
+	.header a:link{
+		color:white;
+	}
+	.header a:visited{
+		color:white;
+	}
+	.header a:active{
+		color:white;
+	}
+	.header a:hover{
+		color:white;
+	}
+	
+</style>
 </head>
 <body>
 	<div id="header" class="header">
 		<img src="#"/>
 		<nav>
+			<div class="nav">
 			<a href="${pageContext.request.contextPath}/home">TSOJ</a>
 			<a href="${pageContext.request.contextPath}/problemset">Problem Set</a>
 			<a href="${pageContext.request.contextPath}/contest">Contest</a>
 			<a href="${pageContext.request.contextPath}/statu">Status</a>
 			<a href="${pageContext.request.contextPath}/rank">Rank</a>
 			<a href="${pageContext.request.contextPath}/about">About</a>
+			</div>
+			<div class="account">
 			<span>
 				<c:choose>
 					<c:when test="${sessionScope.current_user == null}">
@@ -31,6 +81,7 @@
 				</c:choose>
 					
 			</span>
+			</div>
 		</nav>
 	</div>
 </body>
