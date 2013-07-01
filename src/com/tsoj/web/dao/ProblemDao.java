@@ -1,6 +1,7 @@
 package com.tsoj.web.dao;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -41,4 +42,14 @@ public class ProblemDao extends Dao<Problem>{
 		tx.commit();
 		return users;
 	}
+	
+	public long count() {
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createQuery("select count(*) from " + Problem.class.getName());
+		long num = (long) query.iterate().next();
+		tx.commit();
+		return num;
+	}
+	
 }

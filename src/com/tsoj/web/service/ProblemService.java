@@ -32,4 +32,7 @@ public class ProblemService {
 	public List<Problem> findInRange(int from, int to) {
 		return problemDao.findInRange(from, to);
 	}
+	public long count() {
+		return problemDao.count();
+	}
 }

@@ -6,32 +6,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.mid table{
+		border-collapse:collapse;
+		font-size:20px;
+		background-color:#DAE6FF;
+	}
+	.mid table, th, td, tr{
+		border: 1px solid white;
+	}
+	.mid{
+		margin-top:10px;
+	}
+	.mid nav a{
+		padding-left:20px;
+		text-decoration:none;
+		font-size:20px;
+		text-align:right;
+	}
+
+</style>
 </head>
+
 <body>
-	<div>
+	<div id="mid" class="mid">
+		<nav>
+			<a href="${pageContext.request.contextPath}/problemset/${first}">
+				&lt;&lt;
+			</a>
+			<a href="${pageContext.request.contextPath}/problemset/${prev}">
+				&lt;
+			</a>
+			<a href="${pageContext.request.contextPath}/problemset/${next}">
+				&gt;
+			</a>
+			<a href="${pageContext.request.contextPath}/problemset/${last}">
+				&gt;&gt;
+			</a>
+			<a href="${pageContext.request.contextPath}/newproblem">
+				New Problem
+			</a>
+		</nav>
 		<table>
 			<tr>
-				<td>
-					<a href="${pageContext.request.contextPath}/problemset/${prev}">
-						Prev
-					</a>
-				</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/problemset/${next}">
-						Next
-					</a>
-				</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/newproblem">
-						New Problem
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>ID</td>
-				<td>title</td>
-				<td>level</td>
-				<td>categor</td>
+				<th>ID</th>
+				<th>title</th>
+				<th>level</th>
+				<th>category</th>
 			</tr>
 		<c:forEach items="${problemset}" var="problem">
 			<tr>
@@ -54,6 +75,23 @@
 			</tr>
 		</c:forEach>
 		</table>
+		<nav>
+			<a href="${pageContext.request.contextPath}/problemset/${first}">
+				&lt;&lt;
+			</a>
+			<a href="${pageContext.request.contextPath}/problemset/${prev}">
+				&lt;
+			</a>
+			<a href="${pageContext.request.contextPath}/problemset/${next}">
+				&gt;
+			</a>
+			<a href="${pageContext.request.contextPath}/problemset/${last}">
+				&gt;&gt;
+			</a>
+			<a href="${pageContext.request.contextPath}/newproblem">
+				New Problem
+			</a>
+		</nav>
 	</div>
 </body>
 </html>

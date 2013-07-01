@@ -37,8 +37,10 @@ public class ProblemController {
 		if (prev < 0) prev++;
 		int next = id + 1;
 		if (problems.size() < 100) next--;
+		mv.addObject("first", 0);
 		mv.addObject("prev", prev); 
-		mv.addObject("next", next); 
+		mv.addObject("next", next);
+		mv.addObject("last", (problemService.count()+99)/100);
 		return mv;
 	}
 
@@ -53,7 +55,7 @@ public class ProblemController {
 		
 		ModelAndView mv = new ModelAndView("problem");//, "problem", problem); 
 		mv.addObject("problem", problem);
-		
+		mv.addObject("psid", problem.getPid()/100);
 		return mv;
 	}
 	

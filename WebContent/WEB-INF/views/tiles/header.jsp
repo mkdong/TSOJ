@@ -10,10 +10,11 @@
 <style type="text/css">
 	body{
 		text-align:center;
+		background-color:#F1F1FD;
 	}
 	.header{
 		top:0px;
-		background-color:#7798CB;
+		background-color:#6589D1;
 		height:50px;
 		text-align:right;
 		font-size:20px;
@@ -52,7 +53,12 @@
 	.header a:hover{
 		color:white;
 	}
-	
+	.mid{
+		margin-left:auto;
+		margin-right:auto;
+		display:inline-block;
+		width:900px;
+	}
 </style>
 </head>
 <body>
