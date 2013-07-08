@@ -1,7 +1,6 @@
 package com.tsoj.web.dao;
 
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -12,23 +11,23 @@ import org.springframework.stereotype.Repository;
 import com.tsoj.web.entity.Problem;
 
 @Repository("ProblemDao")
-public class ProblemDao extends Dao<Problem>{
+public class ProblemDao extends Dao<Problem> {
 	
 	public Problem findById(int pid) {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		Problem user = (Problem) session.get(Problem.class, pid);
+		Problem problem = (Problem) session.get(Problem.class, pid);
 		tx.commit();
-		return user;
+		return problem;
 	}
 	
 	public List<Problem> findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		Query query = session.createQuery("from Problems");
-		List<Problem> users = query.list();
+		List<Problem> problems = query.list();
 		tx.commit();
-		return users;
+		return problems;
 	}
 	
 	public List<Problem> findInRange(int from, int to) {
@@ -38,9 +37,9 @@ public class ProblemDao extends Dao<Problem>{
 		
 		query.setInteger(0, from);
 		query.setInteger(1, to);
-		List<Problem> users = query.list();
+		List<Problem> problems = query.list();
 		tx.commit();
-		return users;
+		return problems;
 	}
 	
 	public long count() {

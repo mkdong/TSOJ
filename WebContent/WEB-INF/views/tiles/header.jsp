@@ -69,7 +69,7 @@
 			<a href="${pageContext.request.contextPath}/home">TSOJ</a>
 			<a href="${pageContext.request.contextPath}/problemset">Problem Set</a>
 			<a href="${pageContext.request.contextPath}/contest">Contest</a>
-			<a href="${pageContext.request.contextPath}/statu">Status</a>
+			<a href="${pageContext.request.contextPath}/status/0">Status</a>
 			<a href="${pageContext.request.contextPath}/rank">Rank</a>
 			<a href="${pageContext.request.contextPath}/about">About</a>
 			</div>

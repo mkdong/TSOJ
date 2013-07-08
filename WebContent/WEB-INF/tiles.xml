@@ -14,27 +14,39 @@
   	<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
   </definition>
   <definition name="register" extends="template">
-  	<put-attribute name="title" value="TSOJ - 注册" />
+  	<put-attribute name="title" value="TSOJ - Register" />
   	<put-attribute name="content" value="/WEB-INF/views/register.jsp" />
   </definition>
   <definition name="login" extends="template">
-  	<put-attribute name="title" value="TSOJ - 登录" />
+  	<put-attribute name="title" value="TSOJ - Login" />
   	<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
   </definition>
   <definition name="problemset" extends="template">
-  	<put-attribute name="title" value="TSOJ - 题目列表" />
+  	<put-attribute name="title" value="TSOJ - Problem Set" />
   	<put-attribute name="content" value="/WEB-INF/views/problemset.jsp" />
   </definition>
   <definition name="problem" extends="template">
-  	<put-attribute name="title" value="TSOJ - 题目" />
+  	<put-attribute name="title" value="TSOJ - Problem" />
   	<put-attribute name="content" value="/WEB-INF/views/problem.jsp" />
   </definition>
   <definition name="newproblem" extends="template">
-  	<put-attribute name="title" value="TSOJ - 题目" />
+  	<put-attribute name="title" value="TSOJ - Problem" />
   	<put-attribute name="content" value="/WEB-INF/views/problemmanager.jsp" />
   </definition>
   <definition name="modifyproblem" extends="template">
-  	<put-attribute name="title" value="TSOJ - 题目" />
+  	<put-attribute name="title" value="TSOJ - Problem" />
   	<put-attribute name="content" value="/WEB-INF/views/problemmanager.jsp" />
+  </definition>
+  <definition name="submit" extends="template">
+  	<put-attribute name="title" value="TSOJ - Submit" />
+  	<put-attribute name="content" value="/WEB-INF/views/submit.jsp" />
+  </definition>
+  <definition name="comment" extends="template">
+  	<put-attribute name="title" value="TSOJ - Comment" />
+  	<put-attribute name="content" value="/WEB-INF/views/comment.jsp" />
+  </definition>
+  <definition name="status" extends="template">
+  	<put-attribute name="title" value="TSOJ - Status" />
+  	<put-attribute name="content" value="/WEB-INF/views/status.jsp" />
   </definition>
 </tiles-definitions>

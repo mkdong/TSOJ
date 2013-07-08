@@ -96,11 +96,18 @@
 				<c:out value="${problem.psampleo}"></c:out>
 			</p>			
 		</div>
+		<c:if test="${not guest}">
+			<div class="submitdiv">
+				<form action="${pageContext.request.contextPath}/submit/${problem.pid}" method="post" enctype="multipart/form-data">
+					<input type="file" name="file" />
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
+		</c:if>
 		<nav>
-			<a href="${pageContext.request.contextPath}/submit/<c:out value="${problem.pid}"></c:out>">Submit</a>
 			<a href="${pageContext.request.contextPath}/problemset/<c:out value="${psid}"></c:out>">Go Back</a>
-			<a href="${pageContext.request.contextPath}/status/<c:out value="${problem.pid}"></c:out>">Status</a>
-			<a href="${pageContext.request.contextPath}/comments/<c:out value="${problem.pid}"></c:out>">Discuss</a>
+			<a href="${pageContext.request.contextPath}/status/<c:out value="${problem.pid}/0"></c:out>">Status</a>
+			<a href="${pageContext.request.contextPath}/comment/<c:out value="${problem.pid}"></c:out>/0">Discuss</a>
 		</nav>
 	</div>
 </body>

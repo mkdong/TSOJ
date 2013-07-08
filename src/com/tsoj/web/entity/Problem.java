@@ -39,6 +39,10 @@ public class Problem implements Serializable{
 	@Column
 	private String pcategory;
 	
+//	@OneToMany(cascade={CascadeType.ALL})
+//	@JoinColumn(name="pid")
+//	private List<Coment> comments = new PersistentList();
+	
 	public Problem() {
 		ptitle = pcontent = pinput = poutput = psamplei = psampleo = pcategory = null;
 		ptime = pmemory = plevel = 0;
@@ -66,6 +70,9 @@ public class Problem implements Serializable{
 	public int getPlevel() { return plevel; }
 	public void setPcategory(String pcategory) { this.pcategory = pcategory; }
 	public String getPcategory() { return pcategory; }
+//	public void setComments(List<Comment> comments) { this.comments = comments; }
+//	public List<Comment> getComments() { return comments; }
+	
 	/*
 	public static final Problem fetchProblem(int pid) throws Exception {
 		Connection conn = null;

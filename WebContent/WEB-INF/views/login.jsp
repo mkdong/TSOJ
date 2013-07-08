@@ -27,7 +27,7 @@
 </script>
 <body>
 	<div>
-		<form>
+		<form action="d">
 			<input id="username" name="uid" type="text" placeholder="Your user name here."/>
 			<input id="password" name="upasswd" type="password" placeholder="Your password here"/>
 			<input id="login" type="submit" onclick="javascript:void(0);"/>

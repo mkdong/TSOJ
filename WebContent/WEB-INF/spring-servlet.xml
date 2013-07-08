@@ -9,7 +9,8 @@
       http://www.springframework.org/schema/context 
       http://www.springframework.org/schema/context/spring-context.xsd 
       http://www.springframework.org/schema/mvc 
-      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"> 
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	  ">
        
     <!-- tiles -->
 	<bean id="viewResolver"
@@ -47,10 +48,23 @@
     <bean id="UserDao" class="com.tsoj.web.dao.UserDao" />
     <bean id="ProblemService" class="com.tsoj.web.service.ProblemService" />
     <bean id="ProblemDao" class="com.tsoj.web.dao.ProblemDao" />
+    <bean id="CommentService" class="com.tsoj.web.service.CommentService" />
+    <bean id="CommentDao" class="com.tsoj.web.dao.CommentDao" />
+    <bean id="SolutionService" class="com.tsoj.web.service.SolutionService" />
+    <bean id="SolutionDao" class="com.tsoj.web.dao.SolutionDao" />
+    <bean id="SolutionMongoDao" class="com.tsoj.web.dao.SolutionMongoDao" />
+    
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="100000"/>
+	</bean> 
+    
     
     <!-- Hibernate4 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">	
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/tsoj?characterEncoding=UTF-8" />
 		<property name="username" value="tsoi" />
@@ -80,5 +94,7 @@
             </props>
         </property>
   	</bean>
-	    
+	
+	<bean id="Evaluator" class="com.tsoj.web.evaluator.Evaluator" scope="singleton">
+	</bean>
 </beans> 

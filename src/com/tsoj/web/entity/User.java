@@ -3,11 +3,8 @@ package com.tsoj.web.entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
@@ -64,6 +61,7 @@ public class User implements Serializable {
 	public String getUinfo() {
 		return uinfo;
 	}
+	
 	/*
 	public static final User fetchUser(String uid) throws Exception {
 		Connection conn = null;

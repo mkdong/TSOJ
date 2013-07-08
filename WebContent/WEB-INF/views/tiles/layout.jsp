@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title" /></title>
-<script type="text/javascript" src="/scripts/jquery.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery.js"></script>
 <script>
 </script>
 </head>

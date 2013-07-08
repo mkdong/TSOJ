@@ -1,4 +1,4 @@
-package com.tsoj.web;
+package com.tsoj.web.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
