@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TSOJ -- login</title>
 <script type="text/javascript" src="scripts/jquery.js"></script>
-</head>
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#login").click(function () {
@@ -25,11 +24,22 @@
 		});
 	});
 </script>
+<style type="text/css">
+	input {
+		font-size: 20px;
+		margin: 10px;
+	}
+	form {
+		margin: 40px;
+	}
+</style>
+</head>
+
 <body>
 	<div>
 		<form action="d">
-			<input id="username" name="uid" type="text" placeholder="Your user name here."/>
-			<input id="password" name="upasswd" type="password" placeholder="Your password here"/>
+			<input id="username" name="uid" type="text" placeholder="User name"/><br />
+			<input id="password" name="upasswd" type="password" placeholder="Password"/><br />
 			<input id="login" type="submit" onclick="javascript:void(0);"/>
 		</form>
 	</div>

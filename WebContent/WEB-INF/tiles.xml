@@ -49,4 +49,21 @@
   	<put-attribute name="title" value="TSOJ - Status" />
   	<put-attribute name="content" value="/WEB-INF/views/status.jsp" />
   </definition>
+  <definition name="rank" extends="template">
+  	<put-attribute name="title" value="TSOJ - Rank" />
+  	<put-attribute name="content" value="/WEB-INF/views/rank.jsp" />
+  </definition>
+  <definition name="about" extends="template">
+  	<put-attribute name="title" value="TSOJ - About" />
+  	<put-attribute name="content" value="/WEB-INF/views/about.jsp" />
+  </definition>
+  <definition name="info" extends="template">
+  	<put-attribute name="title" value="TSOJ - Info" />
+  	<put-attribute name="content" value="/WEB-INF/views/info.jsp" />
+  </definition>
+  <definition name="test" extends="template">
+  	<put-attribute name="title" value="TSOJ - Test" />
+  	<put-attribute name="content" value="/WEB-INF/views/test.jsp" />
+  </definition>
+  
 </tiles-definitions>

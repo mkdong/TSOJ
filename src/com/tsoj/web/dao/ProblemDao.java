@@ -33,7 +33,7 @@ public class ProblemDao extends Dao<Problem> {
 	public List<Problem> findInRange(int from, int to) {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("from " + Problem.class.getName() + " where pid>=? and pid<=?");
+		Query query = session.createQuery("from " + Problem.class.getName() + " where pid>=? and pid<?");
 		
 		query.setInteger(0, from);
 		query.setInteger(1, to);
@@ -45,8 +45,10 @@ public class ProblemDao extends Dao<Problem> {
 	public long count() {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
-		Query query = session.createQuery("select count(*) from " + Problem.class.getName());
-		long num = (long) query.iterate().next();
+		Query query = session.createSQLQuery("select countProblem();");
+		//Query query = session.createQuery("select count(*) from " + Problem.class.getName());
+		long num = Long.parseLong(query.uniqueResult().toString());
+		//long num = (long) query.iterate().next();
 		tx.commit();
 		return num;
 	}

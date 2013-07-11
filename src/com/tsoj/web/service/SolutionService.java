@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tsoj.web.dao.SolutionDao;
 import com.tsoj.web.dao.SolutionMongoDao;
+import com.tsoj.web.dao.SolutionMongoDao.UserRank;
 import com.tsoj.web.entity.Solution;
 
 @Service
@@ -44,5 +45,8 @@ public class SolutionService {
 	}
 	public List<Solution> findInRangeByBothId(int from, int to, int uid, int pid) {
 		return solutionDao.findInRangeByBothId(from, to, uid, pid);
+	}
+	public List<UserRank> rankInRange(int from, int to) {
+		return solutionDao.rank(from, to);
 	}
 }

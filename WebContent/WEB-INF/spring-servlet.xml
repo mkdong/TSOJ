@@ -53,12 +53,14 @@
     <bean id="SolutionService" class="com.tsoj.web.service.SolutionService" />
     <bean id="SolutionDao" class="com.tsoj.web.dao.SolutionDao" />
     <bean id="SolutionMongoDao" class="com.tsoj.web.dao.SolutionMongoDao" />
+    <bean id="AvatarDao" class="com.tsoj.web.dao.AvatarDao" />
+    <bean id="AvatarService" class="com.tsoj.web.service.AvatarService" />
     
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
 		<!-- one of the properties available; the maximum file size in bytes -->
-		<property name="maxUploadSize" value="100000"/>
+		<property name="maxUploadSize" value="512000"/>
 	</bean> 
     
     
@@ -71,7 +73,6 @@
 		<property name="password" value="tsoi" />
 	</bean>
 
-  	<!-- 可追加配置二级缓存 -->
   	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
     	<property name="dataSource" ref="dataSource"/>
     	<property name="packagesToScan">
@@ -91,6 +92,7 @@
                 <prop key="hibernate.generate_statistics">true</prop>
                 <prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
                 <prop key="hibernate.current_session_context_class">thread</prop>
+            	<prop key="hibernate.connection.isolation">2</prop>
             </props>
         </property>
   	</bean>

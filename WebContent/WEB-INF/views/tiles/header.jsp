@@ -68,9 +68,9 @@
 			<div class="nav">
 			<a href="${pageContext.request.contextPath}/home">TSOJ</a>
 			<a href="${pageContext.request.contextPath}/problemset">Problem Set</a>
-			<a href="${pageContext.request.contextPath}/contest">Contest</a>
+			<!-- <a href="${pageContext.request.contextPath}/contest">Contest</a> -->
 			<a href="${pageContext.request.contextPath}/status/0">Status</a>
-			<a href="${pageContext.request.contextPath}/rank">Rank</a>
+			<a href="${pageContext.request.contextPath}/rank/0">Rank</a>
 			<a href="${pageContext.request.contextPath}/about">About</a>
 			</div>
 			<div class="account">
@@ -81,7 +81,7 @@
 						<a href="${pageContext.request.contextPath}/register">Register</a>
 					</c:when>
 					<c:otherwise>
-						Hi, ${sessionScope.current_user.uid}
+						Hi, <a href="${pageContext.request.contextPath}/info">${sessionScope.current_user.uid}</a>
 						<a href="${pageContext.request.contextPath}/logout">Logout</a>
 					</c:otherwise>
 				</c:choose>

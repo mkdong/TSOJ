@@ -1,6 +1,10 @@
 package com.tsoj.web.evaluator;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.annotation.Resource;
@@ -19,29 +23,66 @@ public class Evaluator {
 			private String iFileName;
 			private String ansFileName;
 			private long time;
+			private long memory;
 			private String result;
 			
 			public InnerExecuter(String binary, String iFileName, String ansFileName) {
 				this.binary = binary;
 				this.iFileName = iFileName;
 				this.ansFileName = ansFileName;
+				this.result = "JUDGING";
+				this.time = 0;
+				System.out.println("IE: binary: " + binary);
+				System.out.println("IE: iFileName: " + iFileName);
+				System.out.println("IE: ansFileName: " + ansFileName);
 			}
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
+					System.out.println("InnerExecture: Run");
+					long m = Runtime.getRuntime().freeMemory();
 					long t = System.currentTimeMillis();
-					Process pro = Runtime.getRuntime().exec(binary + " < " + iFileName + " > " + ansFileName);
-					pro.waitFor();
-					time= System.currentTimeMillis() - t;
-					if (0 != pro.exitValue()) {
-						result = "RE";
+					System.out.println("InnerExecture: Run");
+					Process pro = Runtime.getRuntime().exec(binary);// + " < " + iFileName + " > " + ansFileName);
+					//
+					char buff[] = new char[1024];
+					//output to binary
+					OutputStreamWriter osr = new OutputStreamWriter(pro.getOutputStream()); 
+					InputStreamReader isr = new InputStreamReader(new FileInputStream(iFileName));
+					int count = 0;
+					while ((count = isr.read(buff)) != -1) {
+						osr.write(buff, 0, count);
 					}
-					result = "OK";
+					isr.close();
+					osr.close();
+					//input from binary
+					isr = new InputStreamReader(pro.getInputStream());
+					osr = new OutputStreamWriter(new FileOutputStream(ansFileName));
+					count = 0;
+					while ((count = isr.read(buff)) != -1) {
+						osr.write(buff, 0, count);
+					}
+					isr.close();
+					osr.close();
+					
+					System.out.println("InnerExecture: Run");
+					if (0 != pro.waitFor()) {
+						this.result = "RE";
+						return;
+					}
+					time= System.currentTimeMillis() - t;
+//					memory = m - Runtime.getRuntime().freeMemory();
+					memory = Runtime.getRuntime().totalMemory()/1000;
+					System.out.println("InnerExecture: " + String.valueOf(time));
+					System.out.println("InnerExecture: " + String.valueOf(memory));
+					this.result = "OK";
 				} catch (IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					System.out.println("InnerExecture: ERROR");
+					
 				}
 			}
 			public long getTime() {
@@ -49,6 +90,9 @@ public class Evaluator {
 			}
 			public String getResult() {
 				return this.result;
+			}
+			public long getMemory() {
+				return this.memory;
 			}
 		}
 		
@@ -69,7 +113,7 @@ public class Evaluator {
 			String binary = testRoot + name;
 			String iFileName = dataRoot + String.valueOf(pid) + ".in";
 			String oFileName = dataRoot + String.valueOf(pid) + ".out";
-			String ansFileName = dataRoot + name + ".ans";
+			String ansFileName = testRoot + name + ".ans";
 			
 			try {
 				Process pro = Runtime.getRuntime().exec("/bin/cp " + fileName + " " + tmpFileName);
@@ -86,8 +130,9 @@ public class Evaluator {
 				t.start();
 				t.join(5000);
 				solution.setStime((int)t.getTime());
+				solution.setSmemory(502);
 				solution.setSresult(t.getResult());
-				if (t.getState() == Thread.State.TIMED_WAITING) {
+				if (t.getState() != Thread.State.TERMINATED) {
 					solution.setSresult("TLE");
 					return solution;
 				}
@@ -96,12 +141,12 @@ public class Evaluator {
 					return solution;
 				}
 				
-				pro = Runtime.getRuntime().exec("/bin/diff " + ansFileName + " " + oFileName);
+				pro = Runtime.getRuntime().exec("/usr/bin/diff " + ansFileName + " " + oFileName);
 				if (0 != pro.waitFor()) {
 					solution.setSresult("WA");
 					return solution;
 				}
-				solution.setSresult("WA");
+				solution.setSresult("AC");
 				return solution;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

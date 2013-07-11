@@ -1,6 +1,7 @@
 package com.tsoj.web;
 
 
+import java.io.File;
 import java.util.Enumeration;
 
 import javax.annotation.Resource;
@@ -10,14 +11,18 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.tsoj.web.entity.User;
+import com.tsoj.web.service.AvatarService;
 import com.tsoj.web.service.UserService;
 
 @Controller
 public class UserController {
 	@Resource
 	private UserService userService;
+	@Resource
+	private AvatarService avatarService;
 	
 	@RequestMapping(value = "/register")
 	public String register(HttpSession session) {
@@ -104,5 +109,93 @@ public class UserController {
 			return "Wrong Password";
 		}
 		return "OK";
+	}
+	
+	@RequestMapping(value = "/info")
+	public String info(HttpSession session) {
+		//check session
+		User usr = (User) session.getAttribute("current_user");
+		if (null == usr) {
+			//show login page
+			return "redirect:login";
+		} else {
+			//already logged in, show info
+			return "info";
+		}
+	}
+	
+	@RequestMapping(value = "/srv/password", method=RequestMethod.POST)
+	@ResponseBody
+	public String srvPassword(
+			@RequestParam("upasswd") String upasswd,
+			HttpSession session) {
+		
+		//check session
+		User user = (User) session.getAttribute("current_user");
+		if (null == user) {
+			//show login page
+			return "please login first";
+		}
+		user.setUpasswd(upasswd);
+		userService.update(user);
+		//set session
+		session.setAttribute("current_user", user);
+		return "OK";
+	}
+	
+	
+	@RequestMapping(value = "/avatar", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] getAvatar(
+			HttpSession session) {
+		
+		//check session
+		User user = (User) session.getAttribute("current_user");
+		
+		byte bytes[] = avatarService.findOne(user.getUid());
+		
+		return bytes;
+	}
+	
+	@RequestMapping(value = "/avatar", method=RequestMethod.POST)
+	public String avatar(
+			@RequestParam("avatar") CommonsMultipartFile mFile,
+			HttpSession session) {
+		
+		//check session
+		User user = (User) session.getAttribute("current_user");
+		if (null == user) {
+			//show login page
+			return "redirect:login";
+		}
+		
+		Logger logger = LogManager.getLogger(ProblemController.class.getName());
+		logger.info("handling form upload");
+		logger.info(mFile.getOriginalFilename());
+		
+		String suffix = ""; 
+		if (mFile.getOriginalFilename().endsWith(".jpg")) {
+			suffix = "";
+		} else if (mFile.getOriginalFilename().endsWith(".png")) {
+			suffix = ".png";
+		}
+		
+		if (suffix.equals("")) {
+			return "redirect:info";
+		}
+		if (mFile.isEmpty()) {
+			return "redirect:info";
+		}
+		
+		String path = session.getServletContext().getRealPath("/") + "avatars";
+		File file = new File(path);
+		if (!file.exists()) {
+			file.mkdir();
+		}
+		
+		byte bytes[] = mFile.getBytes();
+		avatarService.save(bytes, user.getUid());
+		
+		return "redirect:info";
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.*;
 
 import com.tsoj.web.entity.Solution;
 import com.tsoj.web.service.SolutionService;
+import com.tsoj.web.dao.SolutionMongoDao.UserRank;
 
 @Controller
 public class StatusController {
@@ -56,6 +57,35 @@ public class StatusController {
 		int size = solutions.size();
 		logger.info(size);
 		mv.addObject("solutions", solutions);
+		int prev = id - 1;
+		if (prev < 0) prev++;
+		int next = id + 1;
+		if (size < 20) next--;
+		mv.addObject("first", 0);
+		mv.addObject("prev", prev); 
+		mv.addObject("next", next);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/rank/{id}")
+	public ModelAndView rank(
+			@PathVariable int id,
+			HttpSession session) {
+		//init logger
+		Logger logger = LogManager.getLogger(StatusController.class.getName());
+		logger.info("rank:");
+		
+		ModelAndView mv = new ModelAndView("rank");
+		
+		if (id < 0) id = 0;
+		List<UserRank> userRanks = solutionService.rankInRange(id*20, id*20+20);
+		for (int i=0; i<userRanks.size(); ++i) {
+			userRanks.get(i).setRank(userRanks.get(i).getRank() + id*20);
+		}
+		
+		int size = userRanks.size();
+		logger.info(size);
+		mv.addObject("userRanks", userRanks);
 		int prev = id - 1;
 		if (prev < 0) prev++;
 		int next = id + 1;

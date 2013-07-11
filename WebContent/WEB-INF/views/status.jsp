@@ -57,6 +57,7 @@
 		</nav>
 		<table>
 			<tr>
+				<th>SID</th>
 				<th>PID</th>
 				<th>UID</th>
 				<th>Language</th>
@@ -67,6 +68,9 @@
 			</tr>
 		<c:forEach items="${solutions}" var="solution">
 			<tr>
+				<td>
+					<c:out value="${solution.sid}" />
+				</td>
 				<td>
 					<a href="${pageContext.request.contextPath}/problem/${solution.pid}">
 						<c:out value="${solution.pid}" />

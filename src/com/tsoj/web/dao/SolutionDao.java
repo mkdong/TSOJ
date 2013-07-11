@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import com.tsoj.web.dao.SolutionMongoDao.UserRank;
 import com.tsoj.web.entity.Solution;
 
 
@@ -86,5 +87,16 @@ public class SolutionDao extends Dao<Solution> {
 		List<Solution> solutions = query.list();
 		tx.commit();
 		return solutions;
+	}
+	
+	public List<UserRank> rankInRange(int from, int to) {
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		Query query = session.createSQLQuery("select * from UserRankView order by ac desc, tot asc");
+		query.setFirstResult(from);
+		query.setMaxResults(to - from);
+		List<UserRank> ranks = query.list();
+		tx.commit();
+		return ranks;
 	}
 }
